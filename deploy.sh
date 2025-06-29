@@ -7,9 +7,9 @@ set -u
 
 BUILD=./build/
 HTML=$BUILD/html
-DIR=$BUILD/jfbastien.github.io
+DIR=$BUILD/godexsoft.github.io
 PAPERS=$DIR/papers
-CLONE=git@github.com:jfbastien/jfbastien.github.io.git
+CLONE=git@github.com:godexsoft/godexsoft.github.io.git
 
 HASH=$(git rev-parse HEAD)
 SUBJECT=$(git log -n1 --pretty=format:%s)
