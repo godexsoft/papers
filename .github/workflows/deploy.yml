@@ -26,11 +26,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - name: Install and update Bikeshed
+      - name: Install tools
         run: |
           pip install bikeshed linkchecker
           bikeshed update
-      - name: Build and check links
+      - name: Build HTML specs
+        run: make html
+      - name: Check links
         run: make linkcheck
       - name: Setup Pages
         uses: actions/configure-pages@v4
