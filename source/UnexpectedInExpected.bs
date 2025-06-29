@@ -12,19 +12,12 @@ Editor: Ayaz Salikhov, Ripple, asalikhov@ripple.com
 Date: 2025-06-29
 Markup Shorthands: markdown yes
 Toggle Diffs: no
-No abstract: true
+Abstract: We propose to add a `has_error()` member function to `std::expected` to complement the existing `has_value()` functionality.
 </pre>
 
 <style>
 table, th, td { border: 2px solid grey; }
 </style>
-
-
-Abstract {#abstract}
-========
-
-We propose to add a `has_error()` member function to `std::expected` to complement the existing `has_value()` functionality.
-
 
 Motivation {#motivation}
 ==========
