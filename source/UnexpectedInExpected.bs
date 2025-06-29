@@ -5,7 +5,7 @@ Revision: 0
 Audience: LWG
 Status: D
 Group: WG21
-URL: http://wg21.link/D9999
+URL: https://godexsoft.github.io/papers/UnexpectedInExpected.html
 !Source: <a href="https://github.com/godexsoft/papers/blob/master/source/UnexpectedInExpected.bs">github.com/godexsoft/papers/blob/master/source/UnexpectedInExpected.bs</a>
 Editor: Alex Kremer, Ripple, akremer@ripple.com
 Editor: Ayaz Salikhov, Ripple, asalikhov@ripple.com

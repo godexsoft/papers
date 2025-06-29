@@ -16,4 +16,4 @@ html: clean
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 linkcheck:
-	find $(BUILDDIR)/html -name '*.html' | xargs linkchecker
+	find $(BUILDDIR)/html -name '*.html' | xargs linkchecker --check-extern --no-warnings
