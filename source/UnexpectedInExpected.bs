@@ -24,65 +24,62 @@ Motivation {#motivation}
 
 Today, `std::expected` provides a `has_value()` member function that can be used to check whether the instance holds a value or an error. There is also an implicit conversion operator to bool that can be used for the same purpose. These two existing mechanisms follow several other facilities in the language including `std::optional`.
 
-<b>TODO:</b> we also should say that just because `std::optional` only has `has_value` does not mean `std::expected` also must suffer. They are not the same monad.
+While `std::optional` provides only the `has_value()` member function as its primary state-checking mechanism, `std::expected` serves a fundamentally different purpose. Unlike `std::optional` which represents either a value or nothing, `std::expected` represents either a value or an error.
+This semantic difference warrants distinct interface considerations. Adding `has_error()` creates symmetry in the API that better reflects the dual-state nature of `std::expected` and provides more readable, self-documenting code when the focus is on error handling rather than value presence.
+
+Consider the following examples:
 
 <table>
 <thead><tr><td>Without this proposal</td><td>With this proposal</td></tr></thead>
 <tr>
     <td>
         ```cpp
-        std::expected<void, std::string> result = process();
-        if (!result.has_value()) {
+        auto result = returns_expected();
+        if (!result.has_value())
             return Error(result.error());
-        }
         ```
     </td>
     <td>
         ```cpp
-        std::expected<void, std::string> result = process();
-        if (result.has_error()) {
+        auto result = returns_expected();
+        if (result.has_error())
             return Error(result.error());
-        }
         ```
     </td>
 </tr>
 <tr>
     <td>
         ```cpp
-        std::expected<int, std::string> result = process();
-        if (result.has_value()) {
+        auto result = returns_expected();
+        if (result.has_value())
             return handle(result.value());
-        }
         ```
     </td>
     <td>
         ```cpp
-        std::expected<int, std::string> result = process();
-        if (not result.has_error()) {
+        auto result = returns_expected();
+        if (not result.has_error())
             return handle(result.value());
-        }
         ```
     </td>
 </tr>
 <tr>
     <td>
         ```cpp
-        std::expected<int, std::string> result = process();
+        auto result = returns_expected();
         ASSERT_TRUE(!result.has_value());
         EXPECT_EQ(result.error(), "myError");
         ```
     </td>
     <td>
         ```cpp
-        std::expected<int, std::string> result = process();
+        auto result = returns_expected();
         ASSERT_TRUE(result.has_error());
         EXPECT_EQ(result.error(), "myError");
         ```
     </td>
 </tr>
 </table>
-
-<b>TODO:</b> more interesting use cases and motivation needed
 
 Impact on the standard {#impact}
 ----------------------
@@ -101,5 +98,3 @@ References {#ref}
 
 * <a href="https://wg21.link/P0032r3">P0032</a> Homogeneous interface for variant, any and optional
 * <a href="https://wg21.link/P0323r12">P0323</a> std::expected
-
-<b>TODO:</b> more references may be needed

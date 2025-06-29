@@ -1,11 +1,12 @@
 BUILDDIR      = build
 
-.PHONY: clean html
+.PHONY: html clean
+default: html
 
 clean:
 	rm -rf $(BUILDDIR)/*
 
-html:
+html: clean
 	bikeshed update
 	find ./source/ -name "*.bs" -type f | xargs -I{} -t -n1 bikeshed spec {}
 	mkdir -p $(BUILDDIR)/html
