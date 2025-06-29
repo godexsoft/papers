@@ -1,6 +1,6 @@
 BUILDDIR      = build
 
-.PHONY: html clean
+.PHONY: html clean linkcheck
 default: html
 
 clean:
@@ -13,3 +13,6 @@ html: clean
 	mv ./source/*.html $(BUILDDIR)/html/
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+linkcheck: html
+	find $(BUILDDIR)/html -name '*.html' | xargs linkchecker
