@@ -27,21 +27,19 @@ Today, `std::expected` provides a `has_value()` member function that can be used
 While `std::optional` provides only the `has_value()` member function as its primary state-checking mechanism, `std::expected` serves a fundamentally different purpose. Unlike `std::optional` which represents either a value or nothing, `std::expected` represents either a value or an error.
 This semantic difference warrants distinct interface considerations. Adding `has_error()` creates symmetry in the API that better reflects the dual-state nature of `std::expected` and provides more readable, self-documenting code when the focus is on error handling rather than value presence.
 
-Consider the following examples:
+Consider the following examples (assuming `result` is of type `std::expected<int, std::string>`):
 
 <table>
 <thead><tr><td>Without this proposal</td><td>With this proposal</td></tr></thead>
 <tr>
     <td>
         ```cpp
-        auto result = returns_expected();
         if (!result.has_value())
             return Error(result.error());
         ```
     </td>
     <td>
         ```cpp
-        auto result = returns_expected();
         if (result.has_error())
             return Error(result.error());
         ```
@@ -50,14 +48,12 @@ Consider the following examples:
 <tr>
     <td>
         ```cpp
-        auto result = returns_expected();
         if (result.has_value())
             return handle(result.value());
         ```
     </td>
     <td>
         ```cpp
-        auto result = returns_expected();
         if (not result.has_error())
             return handle(result.value());
         ```
@@ -66,14 +62,12 @@ Consider the following examples:
 <tr>
     <td>
         ```cpp
-        auto result = returns_expected();
         ASSERT_TRUE(!result.has_value());
         EXPECT_EQ(result.error(), "myError");
         ```
     </td>
     <td>
         ```cpp
-        auto result = returns_expected();
         ASSERT_TRUE(result.has_error());
         EXPECT_EQ(result.error(), "myError");
         ```
