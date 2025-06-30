@@ -6,13 +6,13 @@ Audience: LWG
 Status: D
 Group: WG21
 URL: https://godexsoft.github.io/papers/UnexpectedInExpected.html
-!Source: <a href="https://github.com/godexsoft/papers/blob/master/source/UnexpectedInExpected.bs">github.com/godexsoft/papers/blob/master/source/UnexpectedInExpected.bs</a>
+!Source: <a href="https://github.com/godexsoft/papers/blob/master/source/UnexpectedInExpected.bs">https://github.com/godexsoft/papers/blob/master/source/UnexpectedInExpected.bs</a>
 Editor: Alex Kremer, Ripple, akremer@ripple.com
 Editor: Ayaz Salikhov, Ripple, asalikhov@ripple.com
 Date: 2025-06-29
 Markup Shorthands: markdown yes
 Toggle Diffs: no
-Abstract: We propose to add a `has_error()` member function to `std::expected` to complement the existing `has_value()` functionality.
+Abstract: We propose adding a `has_error()` member function to `std::expected` to complement the existing `has_value()` functionality.
 </pre>
 
 <style>
@@ -22,10 +22,13 @@ table, th, td { border: 2px solid grey; }
 Motivation {#motivation}
 ==========
 
-Today, `std::expected` provides a `has_value()` member function that can be used to check whether the instance holds a value or an error. There is also an implicit conversion operator to bool that can be used for the same purpose. These two existing mechanisms follow several other facilities in the language including `std::optional`.
+Today, `std::expected` provides a `has_value()` member function that can be used to check whether the instance holds a value or an error.
+There is also an implicit conversion operator to bool that can be used for the same purpose. These two existing mechanisms follow several other facilities in the language, including `std::optional`.
 
-While `std::optional` provides only the `has_value()` member function as its primary state-checking mechanism, `std::expected` serves a fundamentally different purpose. Unlike `std::optional` which represents either a value or nothing, `std::expected` represents either a value or an error.
-This semantic difference warrants distinct interface considerations. Adding `has_error()` creates symmetry in the API that better reflects the dual-state nature of `std::expected` and provides more readable, self-documenting code when the focus is on error handling rather than value presence.
+While `std::optional` provides only the `has_value()` member function as its primary state-checking mechanism, `std::expected` serves a fundamentally different purpose.
+Unlike `std::optional`, which represents either a value or nothing, `std::expected` represents either a value or an error.
+This semantic difference warrants distinct interface considerations.
+Adding `has_error()` creates symmetry in the API that better reflects the dual-state nature of `std::expected` and provides more readable, self-documenting code when the focus is on error handling rather than value presence.
 
 Consider the following examples (assuming `result` is of type `std::expected<int, std::string>`):
 
@@ -80,15 +83,13 @@ Impact on the standard {#impact}
 
 This change is entirely based on library extensions and does not require any language features beyond what is available in C++ 23.
 
-
 Wording {#word}
 =======
 
 <b>TODO:</b> This is the fun part. We need to add diffs to current draft of the standard here
 
-
 References {#ref}
 ==========
 
-* <a href="https://wg21.link/P0032r3">P0032</a> Homogeneous interface for variant, any and optional
-* <a href="https://wg21.link/P0323r12">P0323</a> std::expected
+* <a href="https://wg21.link/P0032">P0032</a> Homogeneous interface for variant, any and optional
+* <a href="https://wg21.link/P0323">P0323</a> std::expected
