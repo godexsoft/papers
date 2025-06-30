@@ -92,5 +92,5 @@ Wording {#word}
 References {#ref}
 ==========
 
-* <a href="https://wg21.link/P0032">P0032</a> Homogeneous interface for variant, any and optional
-* <a href="https://wg21.link/P0323">P0323</a> std::expected
+* <a href="https://wg21.link/P0032r3">P0032</a> Homogeneous interface for variant, any and optional
+* <a href="https://wg21.link/P0323r12">P0323</a> std::expected
