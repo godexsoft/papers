@@ -55,26 +55,14 @@ Consider the following examples (assuming `result` is of type `std::expected<int
 <tr>
     <td>
         ```cpp
-        if (result.has_value())
-            return handle(result.value());
-        ```
-    </td>
-    <td>
-        ```cpp
-        if (not result.has_error())
-            return handle(result.value());
-        ```
-    </td>
-</tr>
-<tr>
-    <td>
-        ```cpp
+        // somewhere in unit tests
         ASSERT_TRUE(!result.has_value());
         EXPECT_EQ(result.error(), "myError");
         ```
     </td>
     <td>
         ```cpp
+        // somewhere in unit tests
         ASSERT_TRUE(result.has_error());
         EXPECT_EQ(result.error(), "myError");
         ```
