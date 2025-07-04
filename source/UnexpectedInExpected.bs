@@ -23,7 +23,7 @@ Motivation {#motif}
 ==========
 
 Today, `std::expected` provides a `has_value()` member function that can be used to check whether the instance holds a value or an error.
-There is also an implicit conversion operator to bool that can be used for the same purpose.
+There is also an implicit conversion operator to `bool` that can be used for the same purpose.
 These two existing mechanisms follow several other facilities in the language, including `std::optional`.
 
 While `std::optional` provides only the `has_value()` member function as its primary state-checking mechanism, `std::expected` serves a fundamentally different purpose.
@@ -42,13 +42,13 @@ Consider the following examples (assuming `result` is of type `std::expected<int
     <td>
         ```cpp
         if (!result.has_value())
-            return Error(result.error());
+            log_and_exit(result.error());
         ```
     </td>
     <td>
         ```cpp
         if (result.has_error())
-            return Error(result.error());
+            log_and_exit(result.error());
         ```
     </td>
 </tr>
