@@ -78,7 +78,9 @@ This change is entirely based on library extensions and does not require any lan
 Other languages {#otherlang}
 ---------------
 
-This approach is consistent with similar facilities in some other programming languages:
+It might be unexpected to not have a `has_error()` method in `std::expected`, especially when moving from other languages that have similar constructs.
+
+The proposed approach is consistent with similar facilities in some other programming languages:
 
 - **Rust** provides both `is_ok()` and `is_err()` methods on its <a href="https://doc.rust-lang.org/std/result/">`Result` type</a>.
 - **D** provides both `hasValue` and `hasError` properties in its <a href="https://code.dlang.org/packages/expected">`expected` package</a>.
