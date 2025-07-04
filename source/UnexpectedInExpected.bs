@@ -41,14 +41,18 @@ Consider the following examples (assuming `result` is of type `std::expected<int
 <tr>
     <td>
         ```cpp
-        if (!result.has_value())
-            return Error(result.error());
+        if (!result.has_value()) {
+            std::cerr << result.error() << std::endl;
+            std::exit(1);
+        }
         ```
     </td>
     <td>
         ```cpp
-        if (result.has_error())
-            return Error(result.error());
+        if (result.has_error()) {
+            std::cerr << result.error() << std::endl;
+            std::exit(1);
+        }
         ```
     </td>
 </tr>
