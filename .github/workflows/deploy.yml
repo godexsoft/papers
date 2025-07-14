@@ -30,6 +30,7 @@ jobs:
       - name: Build HTML specs
         run: make html
       - name: Check links
+        if: github.event_name == 'pull_request'
         run: make linkcheck
       - name: Setup Pages
         uses: actions/configure-pages@v4
