@@ -5,8 +5,8 @@ Revision: 0
 Audience: LWG
 Status: D
 Group: WG21
-URL: https://godexsoft.github.io/papers/UnexpectedInExpected.html
-!Source: <a href="https://github.com/godexsoft/papers/blob/master/source/UnexpectedInExpected.bs">https://github.com/godexsoft/papers/blob/master/source/UnexpectedInExpected.bs</a>
+URL: https://godexsoft.github.io/papers/P3798R0.html
+!Source: <a href="https://github.com/godexsoft/papers/blob/master/source/P3798R0.bs">https://github.com/godexsoft/papers/blob/master/source/P3798R0.bs</a>
 Editor: Alex Kremer, Ripple, akremer@ripple.com
 Editor: Ayaz Salikhov, Ripple, asalikhov@ripple.com
 Date: 2025-06-29
