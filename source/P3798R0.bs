@@ -3,7 +3,7 @@ Title: The unexpected in std::expected
 Shortname: P3798
 Revision: 0
 Audience: LWG
-Status: D
+Status: P
 Group: WG21
 URL: https://godexsoft.github.io/papers/P3798R0.html
 !Source: <a href="https://github.com/godexsoft/papers/blob/master/source/P3798R0.bs">https://github.com/godexsoft/papers/blob/master/source/P3798R0.bs</a>
