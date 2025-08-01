@@ -25,7 +25,7 @@ Revision History {#changes}
 R1 {#r0r1}
 ---
 
-- Example now uses `std::expected<void, std::string>` (todo)
+- Example now uses `std::expected<void, std::string>`
 - Use shorter wording as suggested by Daniel Krügler (todo)
 - Added SG10 recommendation to bump `__cpp_lib_expected` (todo)
 
@@ -41,10 +41,13 @@ Unlike `std::optional`, which represents either a value or nothing, `std::expect
 This semantic difference warrants distinct interface considerations.
 Adding `has_error()` creates symmetry in the API that better reflects the dual-state nature of `std::expected` and provides more readable, self-documenting code when the focus is on error handling rather than value presence.
 
+In case of `void` partial specialization of `std::expected`, `has_value()` member function is obscure, because `void` doesn't represent a value on its own.
+In the meantime `has_error()` would be clear and more understandable.
+
 Sample usecase {#use}
 --------------
 
-Consider the following examples (assuming `result` is of type `std::expected<int, std::string>`):
+Consider the following examples (assuming `result` is of type `std::expected<void, std::string>`):
 
 <table>
 <thead><tr><td>Without this proposal</td><td>With this proposal</td></tr></thead>
