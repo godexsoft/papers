@@ -1,0 +1,151 @@
+<pre class='metadata'>
+Title: The unexpected in std::expected
+Shortname: P3798
+Revision: 1
+Audience: LEWG, LWG
+Status: P
+Group: WG21
+URL: https://godexsoft.github.io/papers/P3798R1.html
+!Source: <a href="https://github.com/godexsoft/papers/blob/master/source/P3798R1.bs">https://github.com/godexsoft/papers/blob/master/source/P3798R1.bs</a>
+Editor: Alex Kremer, Ripple, akremer@ripple.com
+Editor: Ayaz Salikhov, Ripple, asalikhov@ripple.com
+Date: 2025-08-01
+Markup Shorthands: markdown yes
+Toggle Diffs: no
+Abstract: We propose adding a `has_error()` member function to `std::expected` to complement the existing `has_value()` functionality.
+</pre>
+
+<style>
+table, th, td { border: 2px solid grey; }
+</style>
+
+Revision History {#changes}
+================
+
+R1 {#r0r1}
+---
+
+- Example now uses `std::expected<void, std::string>` (todo)
+- Use shorter wording as suggested by Daniel Krügler (todo)
+- Added SG10 recommendation to bump `__cpp_lib_expected` (todo)
+
+Motivation {#motif}
+==========
+
+Today, `std::expected` provides a `has_value()` member function that can be used to check whether the instance holds a value or an error.
+There is also an implicit conversion operator to `bool` that can be used for the same purpose.
+These two existing mechanisms follow several other facilities in the language, including `std::optional`.
+
+While `std::optional` provides only the `has_value()` member function as its primary state-checking mechanism, `std::expected` serves a fundamentally different purpose.
+Unlike `std::optional`, which represents either a value or nothing, `std::expected` represents either a value or an error.
+This semantic difference warrants distinct interface considerations.
+Adding `has_error()` creates symmetry in the API that better reflects the dual-state nature of `std::expected` and provides more readable, self-documenting code when the focus is on error handling rather than value presence.
+
+Sample usecase {#use}
+--------------
+
+Consider the following examples (assuming `result` is of type `std::expected<int, std::string>`):
+
+<table>
+<thead><tr><td>Without this proposal</td><td>With this proposal</td></tr></thead>
+<tr>
+    <td>
+        ```cpp
+        if (!result.has_value())
+            log_and_exit(result.error());
+        ```
+    </td>
+    <td>
+        ```cpp
+        if (result.has_error())
+            log_and_exit(result.error());
+        ```
+    </td>
+</tr>
+<tr>
+    <td>
+        ```cpp
+        // somewhere in unit tests
+        ASSERT_TRUE(!result.has_value());
+        EXPECT_EQ(result.error(), "myError");
+        ```
+    </td>
+    <td>
+        ```cpp
+        // somewhere in unit tests
+        ASSERT_TRUE(result.has_error());
+        EXPECT_EQ(result.error(), "myError");
+        ```
+    </td>
+</tr>
+</table>
+
+Impact on the standard {#impact}
+----------------------
+
+This change is entirely based on library extensions and does not require any language features beyond what is available in C++ 23.
+
+Other languages {#otherlang}
+---------------
+
+It might be unexpected to not have a `has_error()` method in `std::expected`, especially when moving from other languages that have similar constructs.
+
+The proposed approach is consistent with similar facilities in some other programming languages:
+
+- **Rust** provides both `is_ok()` and `is_err()` methods on its <a href="https://doc.rust-lang.org/std/result/">`Result` type</a>.
+- **D** provides both `hasValue` and `hasError` properties in its <a href="https://code.dlang.org/packages/expected">`expected` package</a>.
+- **Haskell** provides `isRight` and `isLeft` in its <a href="https://hackage.haskell.org/package/base-4.21.0.0/docs/Data-Either.html">`Either` type</a>.
+
+These implementations acknowledge the dual-state nature of error-handling types by offering explicit methods for checking both states, rather than relying solely on negation of a value-checking method.
+
+Proposed Wording {#word}
+================
+
+In <a href="https://eel.is/c++draft/expected#object.general">22.8.6.1 [**expected.object.general**]</a> add:
+
+<blockquote>
+<pre>
+    constexpr bool has_value() const noexcept;
+    <ins>constexpr bool has_error() const noexcept;</ins>
+    constexpr const T& value() const &;
+</pre>
+</blockquote>
+
+In <a href="https://eel.is/c++draft/expected#object.obs">22.8.6.6 [**expected.object.obs**]</a> add after <a href="https://eel.is/c++draft/expected#object.obs-7">❡7</a>:
+
+<blockquote>
+<pre>
+<ins>
+constexpr bool has_error() const noexcept;
+    Returns: !has_val.
+    Remarks: Equivalent to !has_value()
+</ins>
+</pre>
+</blockquote>
+
+In <a href="https://eel.is/c++draft/expected#void.general">22.8.7.1 [**expected.void.general**]</a> add:
+
+<blockquote>
+<pre>
+    constexpr bool has_value() const noexcept;
+    <ins>constexpr bool has_error() const noexcept;</ins>
+    constexpr void operator*() const noexcept;
+</pre>
+</blockquote>
+
+In <a href="https://eel.is/c++draft/expected#void.obs">22.8.7.6 [**expected.void.obs**]</a> add after <a href="https://eel.is/c++draft/expected#void.obs-1">❡1</a>:
+
+<blockquote>
+<pre>
+<ins>
+constexpr bool has_error() const noexcept;
+    Returns: !has_val.
+    Remarks: Equivalent to !has_value()
+</ins>
+</pre>
+</blockquote>
+
+<span style="display:none">
+[[P0032R2]]
+[[P0323R12]]
+</span>
