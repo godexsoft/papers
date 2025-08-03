@@ -27,7 +27,7 @@ R1 {#r0r1}
 
 - Example now uses `std::expected<void, std::string>`
 - Use shorter wording as suggested by Daniel Krügler (todo)
-- Added SG10 recommendation to bump `__cpp_lib_expected` (todo)
+- Added SG10 recommendation to bump `__cpp_lib_expected`
 
 Motivation {#motif}
 ==========
@@ -104,6 +104,22 @@ These implementations acknowledge the dual-state nature of error-handling types 
 Proposed Wording {#word}
 ================
 
+Feature test macro {#macro}
+------------------
+
+Bump the `__cpp_lib_expected` value in <a href="https://eel.is/c++draft/version.syn">17.3.2 [**version.syn**]</a>, :
+
+<blockquote><pre>
+#define __cpp_lib_execution      201902L <em>// also in</em> &lt;execution&gt;
+<del>#define __cpp_lib_expected       202211L <em>// also in</em> &lt;expected&gt;</del>
+<ins>#define __cpp_lib_expected       20yymmL <em>// also in</em> &lt;expected&gt;</ins>
+#define __cpp_lib_filesystem     201703L <em>// also in</em> &lt;filesystem&gt;
+</pre>
+</blockquote>
+
+Expected object {#expected-object}
+---------------
+
 In <a href="https://eel.is/c++draft/expected#object.general">22.8.6.1 [**expected.object.general**]</a> add:
 
 <blockquote>
@@ -125,6 +141,9 @@ constexpr bool has_error() const noexcept;
 </ins>
 </pre>
 </blockquote>
+
+Expected void {#expected-void}
+-------------
 
 In <a href="https://eel.is/c++draft/expected#void.general">22.8.7.1 [**expected.void.general**]</a> add:
 
