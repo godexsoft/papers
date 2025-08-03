@@ -136,7 +136,7 @@ In <a href="https://eel.is/c++draft/expected#object.obs">22.8.6.6 [**expected.ob
 <pre>
 <ins>
 constexpr bool has_error() const noexcept;
-    Effects: Equivalent to: <tt>return !has_value()</tt>
+    Effects: Equivalent to: <tt>return !has_value();</tt>
 </ins>
 </pre>
 </blockquote>
@@ -160,7 +160,7 @@ In <a href="https://eel.is/c++draft/expected#void.obs">22.8.7.6 [**expected.void
 <pre>
 <ins>
 constexpr bool has_error() const noexcept;
-    Effects: Equivalent to: <tt>return !has_value()</tt>
+    Effects: Equivalent to: <tt>return !has_value();</tt>
 </ins>
 </pre>
 </blockquote>
