@@ -107,7 +107,7 @@ Proposed Wording {#word}
 Feature test macro {#macro}
 ------------------
 
-Bump the `__cpp_lib_expected` value in <a href="https://eel.is/c++draft/version.syn">17.3.2 [**version.syn**]</a>, :
+Bump the `__cpp_lib_expected` value in <a href="https://eel.is/c++draft/version.syn">17.3.2 [**version.syn**]</a>:
 
 <blockquote><pre>
 #define __cpp_lib_execution      201902L <em>// also in</em> &lt;execution&gt;
