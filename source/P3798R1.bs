@@ -28,6 +28,7 @@ R1 {#r0r1}
 - Example now uses `std::expected<void, std::string>`
 - Use shorter wording as suggested by Daniel Krügler
 - Added SG10 recommendation to bump `__cpp_lib_expected`
+- Added acknowledgements
 
 Motivation {#motif}
 ==========
@@ -169,3 +170,8 @@ constexpr bool has_error() const noexcept;
 [[P0032R2]]
 [[P0323R12]]
 </span>
+
+Acknowledgements {#respect}
+================
+
+We would like to thank Bronek Kozicki and Gašper Ažman for reviewing the initial draft and providing early feedback, as well as Daniel Krügler for recommending the use of shorthand syntax for "Equivalent to" in the wording.
