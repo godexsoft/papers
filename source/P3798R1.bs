@@ -28,6 +28,7 @@ R1 {#r0r1}
 - Example now uses `std::expected<void, std::string>`
 - Use shorter wording as suggested by Daniel Krügler
 - Added SG10 recommendation to bump `__cpp_lib_expected`
+- Added acknowledgements
 
 Motivation {#motif}
 ==========
